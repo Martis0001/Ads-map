@@ -10,7 +10,7 @@ function firstPageRender() {
     </div>
     
     <div class="container">
-    <h1>Ads Location map</h1>
+    <h1>Ads map</h1>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2334261.624229444!2d21.640393999173444!3d55.1561115942494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd94140f33be13%3A0xf30a54d3a55dbab9!2sLietuva!5e0!3m2!1slt!2slt!4v1678365012306!5m2!1slt!2slt" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
     </div>

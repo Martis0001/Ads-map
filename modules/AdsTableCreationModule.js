@@ -176,6 +176,11 @@ function searchBtnFunctionality(firebaseData, userID) {
     // We create an empty object to hold the filtered information from the ad database.
 
 
+
+
+    
+
+
     searchBtn.addEventListener('click', () => {
         const searchInput = document.getElementById('searchInput');
 
