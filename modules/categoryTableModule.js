@@ -40,6 +40,8 @@ function categoryTableHeader() {
 
 
 
+
+
 function AddCategoryToTable(category, key) {
 
   const categoryTable = document.querySelector('.category-table');
@@ -101,6 +103,8 @@ function addCategoryBtnFunction() {
 }
 
 
+
+
 function delCategoryBtnsFunction() {
   // deleting category from firebase
   const delCategoryBtns = document.querySelectorAll('.delCategoryBtn');
@@ -134,10 +138,94 @@ function categoryTable() {
     categoryTableHeader();
     AddAllItemsToCategoryTable(userData);
 
+
     const categoryBtn = document.querySelector('.enterCategoryBtn');
 
     // saving category data to firebase
     categoryBtn.addEventListener('click', addCategoryBtnFunction)
+    delCategoryBtnsFunction();
+  });
+}
+
+function categoryTableCity() {
+
+  const categoryContainer = document.querySelector('.categoryContainer');
+  categoryContainer.innerHTML = `
+          <div class="container table-container my-6 card">
+          <h3>Cities:</h3>
+          <table class="table table-bordered table-hover category-table">
+              <thead>
+                  <th class="text-center">Nr</th>
+                  <th class="d-flex flex-row categories-input-container">
+                    <input type="text" class="form-control category-input" id="search-name" placeholder="Enter new category name...">
+                    <button class="btn btn-primary enterCityBtn">Enter</button>
+                  </th>
+                  <th class=userDeleteIcon><i class="fa-solid fa-trash"></i></th>
+              </thead>
+              <tbody class="tbody3"></tbody>
+          </table>
+          </div>`
+}
+
+// end of functions responsible for display of categories in table
+
+function addCityBtnFunction() {
+  const categoryInput = document.querySelector('.category-input').value;
+
+  if (categoryInput.length < 3) {
+    universalModalFunctionality('Catgegory name should be atleast 3 symbols');
+  } else {
+    set(ref(database, 'categories/' + categoryInput), {
+      category: categoryInput
+    })
+      .then(() => {
+        // universalModalFunctionality('Catgegory added successfully');
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert(error)
+      })
+  }
+}
+
+function delCityBtnsFunction() {
+  // deleting category from firebase
+  const delCategoryBtns = document.querySelectorAll('.delCategoryBtn');
+  delCategoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const uniqueBtnID = btn.parentElement.parentElement.getAttribute('data-id');
+      console.log(uniqueBtnID)
+      get(ref(database, `categories/${uniqueBtnID}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          remove(ref(database, `categories/${uniqueBtnID}`))
+            .then(() => {
+              // universalModalFunctionality('Catgegory deleted successfully');
+              window.location.reload();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          console.log("No data available")
+        }
+      })
+    })
+  })
+}
+
+function cityTable() {
+  // making functions to build catgeory tables from firebase
+  get(ref(database, 'categories/')).then((snapshot) => {
+    const userData = snapshot.val();
+
+
+    categoryTableCity()
+    AddAllItemsToCategoryTable(userData);
+
+    const cityBtn = document.querySelector('.enterCityBtn');
+
+    // saving category data to firebase
+    cityBtn.addEventListener('click', addCityBtnFunction)
     delCategoryBtnsFunction();
   });
 }

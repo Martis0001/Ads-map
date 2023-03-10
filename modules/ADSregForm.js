@@ -33,6 +33,11 @@ function creatingAdsForm() {
                                 </select>
                             </div>
                             <div class="form-group">
+                                <select class="form-select form-control" id="form-selection-city" aria-label="Default select example">
+                                    <option value="Select your city" disabled selected>Select your city</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <textarea class="form-control" id="ads-about" rows="5"
                                 placeholder="Advertisement description"></textarea>
                             </div>
